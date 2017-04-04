@@ -37,3 +37,8 @@ RUN cd ${KYTOSDIR}/kytos && python3.6 setup.py install
 CMD service openvswitch-switch start &&\
     ovs-vsctl set-manager ptcp:6640 && \
     /bin/bash
+
+EXPOSE 6633
+
+ADD kytos-welcome.txt /tmp/kytos-welcome.txt
+CMD cat /tmp/kytos-welcome.txt && /bin/bash

@@ -1,0 +1,16 @@
+Welcome to Kytos SDN Plataform's docker image
+=============================================
+
+This is a docker image with Kytos SDN Plataform already installed ready to run.
+
+If you want to run kytos, please try:
+
+$ kytosd
+
+If you want to manage napps, please run:
+
+$ kytos napps --help
+
+!! This image is ephemeral. All changes will be lost !!
+
+For more information please visit: https://kytos.io/
