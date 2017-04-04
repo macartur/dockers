@@ -20,6 +20,8 @@ RUN git clone --depth 1 https://github.com/kytos/kytos-napps.git ${KYTOSDIR}/kyt
 RUN git clone --depth 1 https://github.com/kytos/kytos-utils.git ${KYTOSDIR}/kytos-utils
 RUN git clone --depth 1 https://github.com/kytos/kytos.git ${KYTOSDIR}/kytos
 
+ENV LANG C.UTF-8
+
 # Install kytos-utils
 RUN cd ${KYTOSDIR}/kytos-utils && python3.6 setup.py install
 
