@@ -24,13 +24,13 @@ RUN git clone --depth 1 https://github.com/kytos/kytos.git ${KYTOSDIR}/kytos
 RUN cd ${KYTOSDIR}/kytos-utils && python3.6 setup.py install
 
 # Install python-openflow
-#RUN cd ${KYTOSDIR}/python-openflow && python3.6 setup.py install
+RUN cd ${KYTOSDIR}/python-openflow && python3.6 setup.py install
 
 # Install kytos
-#RUN cd ${KYTOSDIR}/kytos && python3.6 setup.py install
+RUN cd ${KYTOSDIR}/kytos && python3.6 setup.py install
 
 # Install kytos-napps
-#RUN cd ${KYTOSDIR}/python-openflow && python3.6 setup.py install
+# RUN cd ${KYTOSDIR}/python-napps && python3.6 setup.py install
 
 CMD service openvswitch-switch start &&\
     ovs-vsctl set-manager ptcp:6640 && \
