@@ -13,4 +13,8 @@ $ kytos napps --help
 
 !! This image is ephemeral. All changes will be lost !!
 
+If you are having problems with mininet, please run with privileges:
+
+$ docker run -it --privileged kytos/tryfirst
+
 For more information please visit: https://kytos.io/
