@@ -7,10 +7,10 @@ ENV KYTOSDIR /usr/local/src/kytos
 ARG CACHE_DATE=2016-01-01
 
 # Install dependencies
-RUN apt-get update && apt-get install -y \
-    git vim python3.6 python3-setuptools libpython3.6 \
-    curl iproute2 iputils-ping mininet net-tools tcpdump x11-xserver-utils \
-    xterm syslog-ng \
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    python3.6 python3-setuptools python3-pip python3-wheel libpython3.6 \
+    git vim curl iproute2 iputils-ping mininet net-tools tcpdump \
+    x11-xserver-utils xterm syslog-ng \
     && rm -rf /var/lib/apt/lists/* \
     && mv /bin/ping /sbin/ping \
     && mv /bin/ping6 /sbin/ping6 \
