@@ -7,8 +7,9 @@ ENV KYTOSDIR /usr/local/src/kytos
 ARG CACHE_DATE=2016-01-01
 
 # Install dependencies
+# g++ is for compiling libsass
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    python3.6 python3-setuptools python3-pip python3-wheel libpython3.6 \
+    python3.6 python3-setuptools python3-pip python3-wheel libpython3.6-dev \
     git vim curl iproute2 iputils-ping mininet net-tools tcpdump \
     x11-xserver-utils xterm syslog-ng \
     && rm -rf /var/lib/apt/lists/* \
@@ -32,7 +33,6 @@ RUN git clone --depth 1 https://github.com/kytos/kytos-utils.git ${KYTOSDIR}/kyt
 RUN git clone --depth 1 https://github.com/kytos/kytos.git ${KYTOSDIR}/kytos
 
 ENV LANG C.UTF-8
-
 
 # Install kytos-utils
 RUN cd ${KYTOSDIR}/kytos-utils && python3.6 setup.py install
