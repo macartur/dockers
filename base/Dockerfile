@@ -10,9 +10,8 @@ ARG CACHE_DATE=2016-01-01
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    git vim python3.6 python3-setuptools libpython3.6 python3-pip \
-    curl iproute2 iputils-ping mininet net-tools tcpdump x11-xserver-utils \
-    xterm syslog-ng tmux screen \
+    git vim python3.6 python3-setuptools python3-pip \
+    curl iproute2 iputils-ping mininet net-tools tcpdump syslog-ng tmux screen \
     && rm -rf /var/lib/apt/lists/* \
     && mv /bin/ping /sbin/ping \
     && mv /bin/ping6 /sbin/ping6 \
@@ -28,8 +27,8 @@ RUN	sed -i -E 's/^(\s*)system\(\);/\1unix-stream("\/dev\/log");/' /etc/syslog-ng
 RUN	sed -i 's/^#\(SYSLOGNG_OPTS="--no-caps"\)/\1/g' /etc/default/syslog-ng
 
 # Install kytos projects
-RUN mkdir $KYTOSDIR
-RUN git clone --depth 1 https://github.com/kytos/python-openflow.git ${KYTOSDIR}/python-openflow
-RUN git clone --depth 1 https://github.com/kytos/kytos-napps.git ${KYTOSDIR}/kytos-napps
-RUN git clone --depth 1 https://github.com/kytos/kytos-utils.git ${KYTOSDIR}/kytos-utils
-RUN git clone --depth 1 https://github.com/kytos/kytos.git ${KYTOSDIR}/kytos
+#RUN mkdir $KYTOSDIR
+#RUN git clone --depth 1 https://github.com/kytos/python-openflow.git ${KYTOSDIR}/python-openflow
+#RUN git clone --depth 1 https://github.com/kytos/kytos-napps.git ${KYTOSDIR}/kytos-napps
+#RUN git clone --depth 1 https://github.com/kytos/kytos-utils.git ${KYTOSDIR}/kytos-utils
+#RUN git clone --depth 1 https://github.com/kytos/kytos.git ${KYTOSDIR}/kytos
