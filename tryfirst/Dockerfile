@@ -1,38 +1,4 @@
-FROM ubuntu:16.10
-
-ARG KYTOSDIR
-ENV KYTOSDIR /usr/local/src/kytos
-
-
-ARG CACHE_DATE=2016-01-01
-
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    git vim python3.6 python3-setuptools libpython3.6 \
-    curl iproute2 iputils-ping mininet net-tools tcpdump x11-xserver-utils \
-    xterm syslog-ng \
-    && rm -rf /var/lib/apt/lists/* \
-    && mv /bin/ping /sbin/ping \
-    && mv /bin/ping6 /sbin/ping6 \
-    && mv /usr/sbin/tcpdump /usr/bin/tcpdump
-
-# Replace the system() source because inside Docker we can't access /proc/kmsg.
-# https://groups.google.com/forum/#!topic/docker-user/446yoB0Vx6w
-RUN	sed -i -E 's/^(\s*)system\(\);/\1unix-stream("\/dev\/log");/' /etc/syslog-ng/syslog-ng.conf
-# Uncomment 'SYSLOGNG_OPTS="--no-caps"' to avoid the following warning:
-# syslog-ng: Error setting capabilities, capability management disabled; error='Operation not permitted'
-# http://serverfault.com/questions/524518/error-setting-capabilities-capability-management-disabled#
-RUN	sed -i 's/^#\(SYSLOGNG_OPTS="--no-caps"\)/\1/g' /etc/default/syslog-ng
-
-# Install kytos projects
-RUN mkdir $KYTOSDIR
-RUN git clone --depth 1 https://github.com/kytos/python-openflow.git ${KYTOSDIR}/python-openflow
-RUN git clone --depth 1 https://github.com/kytos/kytos-napps.git ${KYTOSDIR}/kytos-napps
-RUN git clone --depth 1 https://github.com/kytos/kytos-utils.git ${KYTOSDIR}/kytos-utils
-RUN git clone --depth 1 https://github.com/kytos/kytos.git ${KYTOSDIR}/kytos
-
-ENV LANG C.UTF-8
-
+FROM kytos/base
 
 # Install kytos-utils
 RUN cd ${KYTOSDIR}/kytos-utils && python3.6 setup.py install
@@ -45,9 +11,6 @@ RUN cd ${KYTOSDIR}/kytos && python3.6 setup.py install
 
 # Install kytos-napps
 # RUN cd ${KYTOSDIR}/python-napps && python3.6 setup.py install
-
-CMD service openvswitch-switch start &&\
-    ovs-vsctl set-manager ptcp:6640
 
 EXPOSE 6633
 
