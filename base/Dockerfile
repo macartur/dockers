@@ -25,10 +25,3 @@ RUN	sed -i -E 's/^(\s*)system\(\);/\1unix-stream("\/dev\/log");/' /etc/syslog-ng
 # syslog-ng: Error setting capabilities, capability management disabled; error='Operation not permitted'
 # http://serverfault.com/questions/524518/error-setting-capabilities-capability-management-disabled#
 RUN	sed -i 's/^#\(SYSLOGNG_OPTS="--no-caps"\)/\1/g' /etc/default/syslog-ng
-
-# Install kytos projects
-#RUN mkdir $KYTOSDIR
-#RUN git clone --depth 1 https://github.com/kytos/python-openflow.git ${KYTOSDIR}/python-openflow
-#RUN git clone --depth 1 https://github.com/kytos/kytos-napps.git ${KYTOSDIR}/kytos-napps
-#RUN git clone --depth 1 https://github.com/kytos/kytos-utils.git ${KYTOSDIR}/kytos-utils
-#RUN git clone --depth 1 https://github.com/kytos/kytos.git ${KYTOSDIR}/kytos
