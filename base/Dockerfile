@@ -1,9 +1,7 @@
 # This is base image used by Kytos project
 # Here we only install ubuntu, few dependencies and clone all repos
-FROM ubuntu:16.10
+FROM ubuntu:17.10
 
-ARG KYTOSDIR
-ENV KYTOSDIR /usr/local/src/kytos
 ENV LANG C.UTF-8
 
 ARG CACHE_DATE=2016-01-01
